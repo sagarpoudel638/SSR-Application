@@ -1,5 +1,7 @@
 import express from "express";
 import path from "path";
+import fs from "fs"
+import { error } from "console";
 const app = express();
 
 const PORT = 8000;
@@ -30,9 +32,17 @@ app.get("/registration", (req, res) => {
   console.log("request received registration");
   res.sendFile(`${__dirname}/src/registration.html`);
 });
-
+const fileName = "userList.csv";
 app.post("/registration", (req, res) => {
-    console.log(req.body)
+    
+    const {name, email, password} = req.body;
+    const str = `${name}, ${email}, ${password} \n`
+    console.log(str)
+    fs.appendFile(fileName, str, (error)=>{
+        error? console.log(error)
+        :
+        console.log("data is written in file")
+    });
   console.log("request received registration");
   res.sendFile(`${__dirname}/src/registration.html`);
 });

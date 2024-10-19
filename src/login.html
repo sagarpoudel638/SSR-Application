@@ -10,10 +10,8 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css">
-    <style>
-      
-    </style>
+    <link rel="stylesheet" href="style.css" />
+    <style></style>
   </head>
   <body>
     <div class="wrapper">
@@ -27,26 +25,36 @@
       </nav>
       <hr />
       <h1>Welcome To Login</h1>
-      <hr>
+      <hr />
       <div class="card w-50">
         <div class="card-body">
-          <form class="col g-3">
+          <form class="col g-3" action="/login" enctype="application/x-www-form-urlencoded" method="post">
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Email</label>
-              <input type="email" name ="email" class="form-control" id="inputEmail4" />
+              <input
+                type="email"
+                name="email"
+                
+                class="form-control"
+                id="inputEmail4"
+              />
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control" id="inputPassword4" />
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                id="inputPassword4"
+              />
             </div>
 
             <div class="col-12">
-              <button type="submit" class="btn btn-primary">Login </button>
+              <button type="submit" class="btn btn-primary">Login</button>
             </div>
           </form>
         </div>
       </div>
-     
     </div>
   </body>
 </html>

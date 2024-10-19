@@ -6,6 +6,7 @@ const app = express();
 
 const PORT = 8000;
 const __dirname = path.resolve();
+const fileName = "userList.csv";
 console.log(__dirname);
 // app.get("/",(req,res)=>{
 //     // console.log("we got the request")
@@ -22,6 +23,12 @@ app.use(express.urlencoded({extended:true}));
 app.get("/", (req, res) => {
   res.sendFile(`${__dirname}/src/index.html`);
 });
+
+// read the text file 
+fs.readFile(fileName,'utf8',(error,data)=>{
+    error?console.log(error):console.log(data)
+})
+
 app.listen(PORT, (error) => {
   error ? console.log(error) : console.log(`http://localhost:${PORT}`);
 });
@@ -32,7 +39,7 @@ app.get("/registration", (req, res) => {
   console.log("request received registration");
   res.sendFile(`${__dirname}/src/registration.html`);
 });
-const fileName = "userList.csv";
+
 app.post("/registration", (req, res) => {
     
     const {name, email, password} = req.body;
@@ -52,6 +59,28 @@ app.get("/login", (req, res) => {
   console.log("request received login");
   res.sendFile(`${__dirname}/src/login.html`);
 });
+
+app.post("/login", (req, res) => {
+    const {email, password} = req.body;
+    const str = `${email}, ${password}`;
+
+    //read data from file 
+    fs.readFile(fileName,'utf-8', (error,data)=>{
+
+        if (error){
+            console.log(error)
+            res.send(`<h1> There was an error processing you request</h1>`)
+        }
+        else{
+            const person = data.split("\n").find(user=>user.includes(str));
+            person?.length?
+            res.send(`<h1> Hello ${person.split(",")[0]}, You have logged in succesfully`):res.send(`<h1> Invalid Logiin details `)
+        }
+
+    })
+    
+  });
+
 
 // app.get("/api/v1/get-user",(req,res)=>{
 
